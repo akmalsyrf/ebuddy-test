@@ -1,0 +1,38 @@
+{
+  "ts-node": {
+    "require": ["tsconfig-paths/register"],
+    "files": true
+  },
+  "compilerOptions": {
+    "outDir": "./dist",
+    "module": "commonjs",
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "baseUrl": "./core",
+    "types": ["node"],
+    "paths": {
+      "@/*": ["./*"],
+      "@config/*": ["config/*"],
+      "@controller/*": ["controller/*"],
+      "@middleware/*": ["middleware/*"],
+      "@routes/*": ["routes/*"],
+      "@repository/*": ["repository/*"]
+    },
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "sourceRoot": "./core",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "allowUnusedLabels": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "incremental": true,
+    "inlineSourceMap": true,
+    "strictFunctionTypes": true
+  },
+  "include": ["core/**/*.ts", "types/**/*.d.ts"],
+  "exclude": ["node_modules"]
+}
