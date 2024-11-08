@@ -1,7 +1,6 @@
 import { type Request, type Response, type NextFunction } from "express"
 import { z } from "zod"
-import { authSchema, userSchema } from "../entities"
-import { accountSchema } from "../entities/account"
+import { authSchema, userSchema, accountSchema } from "../../../packages/entities"
 import { badRequestValidator } from "../middleware"
 import { AccountService, AuthService, UserService } from "../service"
 

@@ -1,7 +1,7 @@
 import { type NextFunction, type Request, type Response } from "express"
 import { verify } from "jsonwebtoken"
+import { type Account, type JwtPayload } from "../../../packages/entities"
 import config from "../config"
-import { type Account, type JwtPayload } from "../entities"
 import { BadRequest, InternalError, NotAuthorized } from "."
 
 export function authMiddleware(level: number) {

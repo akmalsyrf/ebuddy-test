@@ -19,8 +19,6 @@ monorepo/
 │   ├── core/
 │   │   └── app.ts
 │   │   └── index.ts
-│   ├── entities/
-│   │   └── user.ts
 │   ├── middleware/
 │   │   └── authMiddleware.ts
 │   ├── repository/

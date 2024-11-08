@@ -1,7 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { authActions, userActions } from "./reducers";
 import { TFormData } from "@/types/formAuthData";
-import { User, userLoginSchema, userRegisterSchema } from "@/apis/user";
+import { User, authSchema, userRegisterSchema } from "../../../packages/entities";
 import {
   getAllUserProfile,
   getUserProfile,
@@ -40,7 +40,7 @@ export const authUser = (
     dispatch(authActions.loginRequest());
 
     try {
-      const schema = path === "login" ? userLoginSchema : userRegisterSchema;
+      const schema = path === "login" ? authSchema : userRegisterSchema;
       schema.parse(formData);
 
       const authData = {

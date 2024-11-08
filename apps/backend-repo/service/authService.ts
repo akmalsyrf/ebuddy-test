@@ -1,7 +1,7 @@
 import { genSalt, hash, compare } from "bcryptjs"
 import { sign } from "jsonwebtoken"
+import { type JwtPayload, type Account, type Auth } from "../../../packages/entities"
 import config from "../config"
-import { type JwtPayload, type Account, type Auth } from "../entities"
 import { BadRequest } from "../middleware"
 import { AccountCollection } from "../repository"
 import { UserService } from "./userService"

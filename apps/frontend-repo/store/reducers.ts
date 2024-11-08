@@ -1,4 +1,4 @@
-import { User } from "@/apis/user";
+import { User } from "../../../packages/entities";
 import { IUserAccount } from "@/types/auth";
 import { IUserProfile } from "@/types/profile";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";

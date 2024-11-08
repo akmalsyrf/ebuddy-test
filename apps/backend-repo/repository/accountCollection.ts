@@ -1,7 +1,7 @@
 import { type firestore } from "firebase-admin"
 import { v4 as uuid } from "uuid"
+import { type Account } from "../../../packages/entities"
 import { db } from "../config/firebaseConfig"
-import { type Account } from "../entities"
 import { NotFound } from "../middleware"
 
 export class AccountCollection {

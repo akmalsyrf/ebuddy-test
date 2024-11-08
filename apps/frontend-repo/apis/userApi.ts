@@ -1,6 +1,6 @@
 import { AUTH_SERVICE, PROFILE_SERVICE } from "@/constant/constant";
 import axios from "axios";
-import { User } from "./user";
+import { User } from "./../../../packages/entities";
 
 interface RegisterData {
   username?: string;

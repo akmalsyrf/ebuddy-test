@@ -13,7 +13,7 @@ import NextLink from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { authUser } from "@/store/actions";
 import { AppDispatch, RootState } from "@/store/store";
-import { userLoginSchema, userRegisterSchema } from "@/apis/user";
+import { authSchema, userRegisterSchema } from "../../../../packages/entities";
 import StatusProcess from "../StatusProcess";
 import { useRouter } from "next/navigation";
 import { authActions } from "@/store/reducers";
@@ -51,7 +51,7 @@ const RightSide: React.FC<RightSideProps> = ({ path }) => {
 
   useEffect(() => {
     try {
-      const schema = path === "register" ? userRegisterSchema : userLoginSchema;
+      const schema = path === "register" ? userRegisterSchema : authSchema;
       schema.parse(formData);
       setIsFormValid(true);
     } catch (e) {

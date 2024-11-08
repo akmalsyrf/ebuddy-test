@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import ProfileFields from "./ProfileFields";
 import { useRouter } from "next/navigation";
-import { createProfile, updateProfile } from "@/apis/userApi";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { createUser, updateUser } from "@/store/actions";
