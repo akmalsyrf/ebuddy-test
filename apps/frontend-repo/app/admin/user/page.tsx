@@ -32,7 +32,7 @@ const TableComponent = () => {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
   const { token, account } = useSelector((state: RootState) => state.auth);
-  const { allProfiles, error } = useSelector((state: RootState) => state.user);
+  const { allProfiles } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (account && account.role === "ADMIN" && token) {

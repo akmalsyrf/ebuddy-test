@@ -8,7 +8,7 @@ import { TagOutlined } from "@mui/icons-material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import SelectInput from "../SelectInput";
 import { z } from "zod";
-import { userLoginSchema, userRegisterSchema } from "@/apis/user";
+import { authSchema, userRegisterSchema } from "../../../../packages/entities";
 
 interface IFormFieldsProps {
   path: "login" | "register";
@@ -51,7 +51,7 @@ const FormFields: React.FC<IFormFieldsProps> = ({
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    const schema = path === "login" ? userLoginSchema : userRegisterSchema;
+    const schema = path === "login" ? authSchema : userRegisterSchema;
 
     try {
       schema.parse({

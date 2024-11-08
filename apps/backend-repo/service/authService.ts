@@ -65,6 +65,7 @@ export class AuthService {
   async checkAuth(id: string) {
     const account = await this.accountRepository.getById(id)
     const user = await this.userService.getUserByAccountId(id)
+    console.log('id ', id)
     return { account, profile: user[0] ?? null }
   }
 }

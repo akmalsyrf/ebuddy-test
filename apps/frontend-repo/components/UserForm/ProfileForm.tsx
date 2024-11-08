@@ -12,7 +12,7 @@ import ProfileFields from "./ProfileFields";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
-import { createUser, updateUser } from "@/store/actions";
+import { createUser, getUserById, updateUser } from "@/store/actions";
 
 type TInputFields = {
   label: string;
@@ -61,9 +61,14 @@ interface FormValues {
   };
 }
 
-const ProfileForm: React.FC = () => {
+interface ProfileFormProps {
+  id: string | null | undefined;
+}
+
+const ProfileForm: React.FC<ProfileFormProps> = ({ id }) => {
   const dispatch: AppDispatch = useDispatch()
   const { account, profile } = useSelector((state: RootState) => state.auth);
+  const { profileSelected } = useSelector((state: RootState) => state.user);
   const [ isCreateNew, setIsCreateNew ] = useState<boolean>(true)
   const [formValues, setFormValues] = useState<FormValues>({
     accountId: "",
@@ -75,7 +80,17 @@ const ProfileForm: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (profile && account) {
+    if (id) {
+      dispatch(getUserById(String(localStorage.getItem("accessToken")), id))
+      if (profileSelected) {
+        const _profile = profileSelected as FormValues
+        setFormValues((prevValues) => ({
+          ...prevValues,
+          ..._profile,
+        }))
+        setIsCreateNew(false)
+      }
+    }else if (profile && account) {
       const _profile = profile as FormValues
       setFormValues((prevValues) => ({
         ...prevValues,
@@ -84,7 +99,7 @@ const ProfileForm: React.FC = () => {
       }))
       setIsCreateNew(false)
     }
-  }, [profile, account])
+  }, [profile, account, id, profileSelected, dispatch])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

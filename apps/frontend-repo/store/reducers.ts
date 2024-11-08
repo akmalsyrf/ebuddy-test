@@ -16,6 +16,7 @@ interface AuthState {
 interface UserState {
   selfProfile: IUserProfile | null;
   allProfiles: IUserProfile[] | null;
+  profileSelected: IUserProfile | null;
   loading: boolean;
   error: string | null;
   success: boolean;
@@ -34,6 +35,7 @@ const initialAuthState: AuthState = {
 const initialUserState: UserState = {
   selfProfile: null,
   allProfiles: null,
+  profileSelected: null,
   loading: false,
   error: null,
   success: false,
@@ -111,6 +113,20 @@ const userSlice = createSlice({
       state.allProfiles = action.payload;
     },
     fetchAllProfilesFailure: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload;
+      state.success = false;
+    },
+    fetchProfileByIdRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+      state.success = false;
+    },
+    fetchProfileByIdSuccess: (state, action: PayloadAction<IUserProfile>) => {
+      state.loading = false;
+      state.profileSelected = action.payload;
+    },
+    fetchProfileByIdFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload;
       state.success = false;

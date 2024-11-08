@@ -1,7 +1,7 @@
 import ProfileForm from "@/components/UserForm/ProfileForm";
 
 const ProfilePage = () => {
-  return <ProfileForm />;
+  return <ProfileForm id={undefined}/>;
 };
 
 export default ProfilePage;

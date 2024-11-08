@@ -10,6 +10,7 @@ import {
   checkAuth,
   createProfile,
   updateProfile,
+  getUserProfileById,
 } from "@/apis/userApi";
 import { z } from "zod";
 import { AppThunk } from "./store";
@@ -66,13 +67,6 @@ export const authUser = (
           profile
         })
       );
-      dispatch(fetchSelfProfileRequest());
-      const profiles = await getUserProfile(token, account.id);
-      if (profiles === null) {
-        dispatch(fetchSelfProfileFailure("Profile not found"));
-      } else {
-        dispatch(fetchSelfProfileSuccess(profiles));
-      }
     } catch (error: any) {
       if (error instanceof z.ZodError) {
         dispatch(
@@ -91,7 +85,7 @@ export const checkAuthAction = (token: string): AppThunk => {
   return async (dispatch: Dispatch) => {
     try {
       const response = await checkAuth(token)
-      const { account, profile } = response.content;
+      const { account, profile } = response!.content;
       dispatch(
         authActions.loginSuccess({
           account,
@@ -109,13 +103,25 @@ export const getAllUser = (token: string): AppThunk => {
   return async (dispatch: Dispatch) => {
     dispatch(fetchAllProfilesRequest());
     try {
-      const allProfile = await getAllUserProfile(token);
-      dispatch(fetchAllProfilesSuccess(allProfile));
+      const allProfiles = await getAllUserProfile(token);
+      dispatch(fetchAllProfilesSuccess(allProfiles));
     } catch (error: any) {
       dispatch(userActions.fetchAllProfilesFailure(error.message));
     }
   };
 };
+
+export const getUserById = (token: string, id: string): AppThunk => {
+  return async (dispatch: Dispatch) => {
+    dispatch(userActions.fetchProfileByIdRequest());
+    try {
+      const profile = await getUserProfileById(token, id);
+      dispatch(userActions.fetchProfileByIdSuccess(profile!.content!.profile as IUserProfile));
+    } catch (error: any) {
+      dispatch(userActions.fetchAllProfilesFailure(error.message));
+    }
+  }
+}
 
 export const createUser = (token: string, payload: User): AppThunk => {
   return async (dispatch: Dispatch) => {

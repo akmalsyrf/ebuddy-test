@@ -1,4 +1,4 @@
-import { type User } from "../entities"
+import { type User } from "../../../packages/entities"
 import { BadRequest } from "../middleware"
 import { UserCollection } from "../repository"
 

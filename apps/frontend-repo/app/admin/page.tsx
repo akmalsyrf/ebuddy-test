@@ -42,7 +42,7 @@ const Dashboard = () => {
           <Grid item xs={12} sm={6} md={3} key={index}>
             <MuiLink
               component={NextLink}
-              href="#"
+              href={`/admin/user/${item.accountId}`}
               underline="none"
               sx={{ textDecoration: "none" }}
             >
