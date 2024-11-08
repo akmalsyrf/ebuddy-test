@@ -95,7 +95,6 @@ const userSlice = createSlice({
     fetchSelfProfileSuccess: (state, action: PayloadAction<IUserProfile>) => {
       state.loading = false;
       state.selfProfile = action.payload;
-      state.success = true;
     },
     fetchSelfProfileFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
@@ -110,7 +109,6 @@ const userSlice = createSlice({
     fetchAllProfilesSuccess: (state, action: PayloadAction<IUserProfile[]>) => {
       state.loading = false;
       state.allProfiles = action.payload;
-      state.success = true;
     },
     fetchAllProfilesFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;

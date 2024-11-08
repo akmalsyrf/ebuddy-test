@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import { Box, Grid, Paper, Typography, Link as MuiLink, Avatar } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
 import NextLink from "next/link";
 import { AppDispatch, RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";

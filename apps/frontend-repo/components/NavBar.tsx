@@ -61,7 +61,7 @@ const Navbar: React.FC = () => {
           href="/"
           color="inherit"
         >
-          MyApp
+          GeekConnect
         </Typography>
 
         <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}>
