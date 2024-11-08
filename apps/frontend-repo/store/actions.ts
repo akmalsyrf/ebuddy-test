@@ -107,7 +107,7 @@ export const checkAuthAction = (token: string): AppThunk => {
 
 export const getAllUser = (token: string): AppThunk => {
   return async (dispatch: Dispatch) => {
-    dispatch(fetchSelfProfileRequest());
+    dispatch(fetchAllProfilesRequest());
     try {
       const allProfile = await getAllUserProfile(token);
       dispatch(fetchAllProfilesSuccess(allProfile));

@@ -1,39 +1,36 @@
-import React from "react";
-import { Box, Grid, Paper, Typography, Link as MuiLink } from "@mui/material";
+"use client"
+import React, { useEffect, useState } from "react";
+import { Box, Grid, Paper, Typography, Link as MuiLink, Avatar } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import NextLink from "next/link";
+import { AppDispatch, RootState } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUser } from "@/store/actions";
+import { IUserProfile } from "@/types/profile";
 
 const Dashboard = () => {
-  const data = [
-    {
-      icon: <AccountCircle sx={{ fontSize: 60 }} />,
-      value: "714k",
-      label: "User",
-      color: "#E3F2FD",
-      href: "/admin/user",
-    },
-    {
-      icon: <AccountCircle sx={{ fontSize: 60 }} />,
-      value: "1.35m",
-      label: "Coming Soon",
-      color: "#BBDEFB",
-      href: "#",
-    },
-    {
-      icon: <AccountCircle sx={{ fontSize: 60 }} />,
-      value: "1.72m",
-      label: "Coming Soon",
-      color: "#FFF9C4",
-      href: "#",
-    },
-    {
-      icon: <AccountCircle sx={{ fontSize: 60 }} />,
-      value: "234",
-      label: "Coming Soon",
-      color: "#FFCDD2",
-      href: "#",
-    },
-  ];
+  const dispatch: AppDispatch = useDispatch()
+  const { allProfiles } = useSelector((state: RootState) => state.user);
+  const [ userProfiles, setUserProfiles ] = useState<(IUserProfile & { color: string })[]>([])
+
+  
+  function getRandomHexColor(): string {
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    return `#${randomColor.padStart(6, '0')}`;
+  }
+  useEffect(() => {
+    dispatch(getAllUser(String(localStorage.getItem("accessToken"))))
+  }, [])
+
+  useEffect(() => {
+    if (allProfiles?.length) {
+      const profilesWithColor = allProfiles.map(profile => ({
+        ...profile,
+        color: getRandomHexColor()
+      }));
+      setUserProfiles(profilesWithColor);
+    }
+  }, [allProfiles])
 
   return (
     <Box sx={{ p: 3 }}>
@@ -42,11 +39,11 @@ const Dashboard = () => {
       </Typography>
 
       <Grid container spacing={2}>
-        {data.map((item, index) => (
+        {userProfiles.map((item, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
             <MuiLink
               component={NextLink}
-              href={item.href}
+              href="#"
               underline="none"
               sx={{ textDecoration: "none" }}
             >
@@ -67,11 +64,16 @@ const Dashboard = () => {
                   width: "100%",
                 }}
               >
-                <Box>{item.icon}</Box>
+                <Box>
+                  <Avatar
+                    sx={{ width: 60, height: 60, margin: { xs: "auto", sm: 0 } }}
+                    src="https://thispersondoesnotexist.com/"
+                  />
+                </Box>
                 <Typography variant="h2" fontWeight="bold">
-                  {item.value}
+                  {item.age} y.o
                 </Typography>
-                <Typography variant="h2">{item.label}</Typography>
+                <Typography variant="h2">{item.fullName}</Typography>
               </Paper>
             </MuiLink>
           </Grid>

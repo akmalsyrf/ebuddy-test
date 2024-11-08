@@ -74,7 +74,7 @@ export const loginUser = async (
   }
 };
 
-export const checkAuth = async (access_token: string): Promise<AuthResponseData> => {
+export const checkAuth = async (access_token: string): Promise<AuthResponseData | undefined> => {
   try {
     const response = await axios.get(`${AUTH_SERVICE}/check-auth`, {
       headers: {
